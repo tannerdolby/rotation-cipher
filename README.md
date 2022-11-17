@@ -3,7 +3,6 @@ JavaScript utility for a ceasar cipher. Default rotation is 13 and can be modifi
 
 ## Example Usage
 
-
 ### Basic Cipher
 Rotate each character by the default 13 characters:
 ```js

@@ -6,81 +6,95 @@ const fs = require('fs')
  * @param {Number} rot 
  * @param {String} customRot 
  */
-function caesarCipher(str, rot=13, customRot) {
+function caesarCipher(str, rot=13, customRot=null, decrypt=false) {
     if (!str) return str
     if (customRot && customRot.length != str.length) {
         return new Error('Custom rotation array must be the same length as the input string')
     }
-    if (customRot) {
+    if (customRot && customRot.length) {
         let r = ''
         customRot.forEach((rotation, i) => {
             r += rotate(str[i], rotation)
         })
         return r
     }
-    return rotate(str, rot)
+    return rotate(str, rot, decrypt)
 }
 
-// rotating only between lowercase english alphabet a-z atm
+function decrypt(str, rot=null) {
+    if (!rot) rot = 13
+    return caesarCipher(str, rot, null, true)
+}
+
+function solve(encoded, guess=null) {
+    // if you know the rotation its obv easy to decrypt
+    // usually the rotation / shift amount is not known
+    // hence the point of the encryption / substitution cipher
+    const potential = []
+    // 1. try a constant shift (e.g. each character shifted by N chars)
+    for (let i=1; i < 27; i++) {
+        const rotatedName = decrypt(encoded, i)
+        potential.push(rotatedName)
+    }
+    // 2. Try random shifts for N guesses
+
+
+    // check for guess
+    if (potential.includes(guess)) {
+        console.log('here', )
+    }
+    console.log(potential);
+    
+}
+
+// rotating only between lowercase english alphabet a-zA-Z atm
 /**
- * Rotate a string by a given rotation amount
+ * Transform a string by a given rotation amount
  * @param {String} str input string (full string undergoing rotation)
  * @param {Number} rot rotation amount - e.g. the number of characters to rotate a given char [0, 26]
  * @returns {String} rotated string
  * 
- * O(n) time and O(n) space
+ * O(n) time and O(1) space
  */
-function rotate(str, rot) {
+function rotate(str, rot, decrypt=false, ascii=false) {
     let cipher = ''
-    for (const idx in str) {
-        if (str[idx] === ' ') {
-            cipher += ' '
+    for (let i=0; i < str.length; i++) {
+        if (str[i] === ' ') {
+            cipher += str[i]
             continue
         }
-        let rotation = str.charCodeAt(idx) + rot
-        rotation = tumble(rotation, str[idx] === str[idx].toLowerCase())
-        cipher += String.fromCharCode(rotation)
+
+        const charCode = str.charCodeAt(i)
+        let shift = !decrypt ? charCode + rot : charCode - rot
+
+        if (str[i] === str[i].toLowerCase()) {
+            if (shift < 97) shift = 123 - (97-shift)
+            if (shift > 122) shift = 96 + (shift-122)
+        } else {
+            if (shift < 65) shift = 90 - (65-shift)
+            if (shift > 90) shift = 64 + (shift-90)
+        }
+
+        cipher += String.fromCharCode(shift)
     }
     return cipher
 }
 
-/**
- * Make sure the rotation amount is within the 97-122 (a-z) character code range (Recursive)
- * 
- * @param {Number} rot rotation amount - e.g. the number of characters to rotate a given char [0, 26]
- * @returns {Number} the rotation amount after its been processed (tumbled)
- * 
- * O(1) time and O(n) space
- */
-function tumble(rot, lower=true) {
-    if ((lower && (rot > 96 && rot < 123))) return rot
-    if ((!lower && (rot > 64 && rot < 91))) return rot
-    if (lower) {
-        rot = rot % 122
-        if (rot < 97) rot += 96
-    } else {
-        rot = rot % 90
-        if (rot < 65) rot += 64
+function asciiTable() {
+    const asciiArr = [];
+    // do 0-127 for decimal ASCII codes
+    for (let i=0; i < 128; i++) {
+        asciiArr.push(String.fromCharCode(i))
     }
-    return tumble(rot, lower)
+    console.log(asciiArr)
 }
 
-/**
- * Random number between the inclusive range [min, max]
- * @param {Number} min
- * @param {Number} max
- */
 function rand(min, max) {
     max = Math.ceil(max)
     min = Math.ceil(min)
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-/**
- * Return a random rotation array of length `str`
- * @param {String} str input string
- * @returns {Array} rotation array
- */
 function randomRotation(str) {
     if (!str) return []
     return Array.from(str).map(_ => rand(1, 26))
@@ -108,12 +122,6 @@ input: ${str}
 name${addSpace(str.length - 'name'.length)} | rotation
 ---------------------------------------\n`
 }
-
-const s = caesarCipher('tanner', null, [3, 5, 1, 2, 7, 8])
-// t  a  n  n  e  r
-// 3  5  1  2  7  8
-// w  f  o  p  l  z
-console.log(s)
 
 
 // Rules
@@ -179,11 +187,14 @@ function writeCipher(str, filePath, n=13) {
     return output
 }
 
-const out = writeCipher('tanner', './rotations.txt', 1000)
-// console.log(out)
+const out = writeCipher('tanner', './rotations.txt', 10)
+console.log(out)
 
-// n^[1-26] time where n is the length of the input string
 // const el = caesarCipher('tanner', 17)
-const el = caesarCipher('THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG', 23)
-console.log(el)
+// const el = caesarCipher('THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG', 23)
+// console.log(el)
+console.log(caesarCipher('tanner'))
+console.log(caesarCipher('tanner', 17))
+console.log(decrypt('kreevi', 17))
+// console.log(solve('kreevi', 'tanner'))
 // gnaare
