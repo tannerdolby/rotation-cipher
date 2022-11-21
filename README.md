@@ -1,6 +1,11 @@
 # Caesar Cipher 🗝️
 JavaScript utility for a ceasar cipher. Default rotation is 13 and can be modified. A custom array of rotations matching the length of the input string can be provided to create more custom transformations.
 
+Use cases:
+- perform a basic substitution cipher
+- perform a randomized subsitution cipher
+- generate a cool username / handle
+
 ## Example Usage
 
 ### Basic Cipher
@@ -52,6 +57,8 @@ console.log(out)
 // umjlfy | [1,12,22,24,1,7]
 // ...
 ```
+
+Note: Scroll through the output file and checkout the random rotations for a chance of finding a really cool username / social share handle.
 
 ### Resources
 - https://en.wikipedia.org/wiki/Caesar_cipher

@@ -9,7 +9,7 @@ const { rand, makeSectionHeader }  = require('./lib/utility')
  */
 function caesarCipher(str, rot=13, customRot=[], useAscii=false, decrypt=false) {
     if (!str) return str
-    const customRotLen = customRot ? customRot.length : null;
+    const customRotLen = customRot ? customRot.length : null
 
     if (customRotLen && customRotLen != str.length) {
         return new Error('Custom rotation array must be the same length as the input string')
@@ -100,9 +100,9 @@ function solve(encoded, guess=null) {
 
     // check for guess
     if (potential.includes(guess)) {
-        console.log('here', )
+        console.log('here')
     }
-    console.log(potential);
+    console.log(potential)
     
 }
 
@@ -145,7 +145,7 @@ function solve(encoded, guess=null) {
 
 function writeCipher(str, folder, filename, n=100) {
     const uniqueRotations = getUniqueRotations(str, n)
-    let names = makeSectionHeader(str, 'Uniform Rotations');
+    let names = makeSectionHeader(str, 'Uniform Rotations')
     let unique = makeSectionHeader(str, 'Random Rotations')
 
     // Uniform rotation
@@ -179,11 +179,11 @@ function helpWrite(folder, filename, data) {
 
     fs.writeFile(pathToWrite, data, (err) => {
         if (err) console.error(err)
-        console.log(`Writing ${pathToWrite}`)
+        console.log(`Writing '${pathToWrite}'`)
     })
 }
 
-const out = writeCipher('tanner', './ciphers/', 'rotations.txt', 250)
+const out = writeCipher('tanner', './foo', 'rotations.txt', 250)
 // console.log(out)
 
 // const el = caesarCipher('tanner', 17)
