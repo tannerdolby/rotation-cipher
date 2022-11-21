@@ -1,4 +1,5 @@
 const fs = require('fs')
+const { rand, makeSectionHeader }  = require('./lib/utility')
 
 /**
  * Caesar cipher. Default rotation is 13
@@ -6,24 +7,82 @@ const fs = require('fs')
  * @param {Number} rot 
  * @param {String} customRot 
  */
-function caesarCipher(str, rot=13, customRot=null, decrypt=false) {
+function caesarCipher(str, rot=13, customRot=[], useAscii=false, decrypt=false) {
     if (!str) return str
-    if (customRot && customRot.length != str.length) {
+    const customRotLen = customRot ? customRot.length : null;
+
+    if (customRotLen && customRotLen != str.length) {
         return new Error('Custom rotation array must be the same length as the input string')
     }
-    if (customRot && customRot.length) {
+
+    if (customRotLen) {
         let r = ''
         customRot.forEach((rotation, i) => {
-            r += rotate(str[i], rotation)
+            r += rotate(str[i], rotation, useAscii, decrypt)
         })
         return r
     }
-    return rotate(str, rot, decrypt)
+
+    return rotate(str, rot, useAscii, decrypt)
 }
 
-function decrypt(str, rot=null) {
-    if (!rot) rot = 13
-    return caesarCipher(str, rot, null, true)
+function decrypt(str, rot=13, useAscii=false) {
+    return caesarCipher(str, rot, useAscii, true)
+}
+
+// rotating only between lowercase english alphabet a-zA-Z atm
+/**
+ * Transform a string by a given rotation amount
+ * @param {String} str input string (full string undergoing rotation)
+ * @param {Number} rot rotation amount - e.g. the number of characters to rotate a given char [0, 26]
+ * @returns {String} rotated string
+ *
+ */
+function rotate(str, rot, useAscii=false, decrypt=false) {
+    let cipher = ''
+    for (let i=0; i < str.length; i++) {
+        if (str[i] === ' ') {
+            cipher += str[i]
+            continue
+        }
+
+        const charCode = str.charCodeAt(i)
+        let shift = !decrypt ? charCode + rot : charCode - rot
+
+        // TODO: cleanup with modular arithmetic
+        if (useAscii) {
+            if (shift < 33) {
+                shift = 127 - (33 - shift)
+            }
+            if (shift > 127) {
+                shift = 33 + (shift - 127)
+            }
+        }
+
+        if (!useAscii && str[i] === str[i].toLowerCase()) {
+            if (shift < 97) shift = 123 - (97-shift)
+            if (shift > 122) shift = 96 + (shift-122)
+        } else {
+            if (shift < 65) shift = 90 - (65-shift)
+            if (shift > 90) shift = 64 + (shift-90)
+        }
+
+        cipher += String.fromCharCode(shift)
+    }
+    return cipher
+}
+
+function randomRotation(str) {
+    if (!str) return []
+    return Array.from(str).map(_ => rand(1, 26))
+}
+
+function getUniqueRotations(str, n) {
+    const uniqueRotations = new Set()
+    for (let i=0; i < n; i++) {
+        uniqueRotations.add(randomRotation(str))
+    }
+    return uniqueRotations
 }
 
 function solve(encoded, guess=null) {
@@ -46,83 +105,6 @@ function solve(encoded, guess=null) {
     console.log(potential);
     
 }
-
-// rotating only between lowercase english alphabet a-zA-Z atm
-/**
- * Transform a string by a given rotation amount
- * @param {String} str input string (full string undergoing rotation)
- * @param {Number} rot rotation amount - e.g. the number of characters to rotate a given char [0, 26]
- * @returns {String} rotated string
- * 
- * O(n) time and O(1) space
- */
-function rotate(str, rot, decrypt=false, ascii=false) {
-    let cipher = ''
-    for (let i=0; i < str.length; i++) {
-        if (str[i] === ' ') {
-            cipher += str[i]
-            continue
-        }
-
-        const charCode = str.charCodeAt(i)
-        let shift = !decrypt ? charCode + rot : charCode - rot
-
-        if (str[i] === str[i].toLowerCase()) {
-            if (shift < 97) shift = 123 - (97-shift)
-            if (shift > 122) shift = 96 + (shift-122)
-        } else {
-            if (shift < 65) shift = 90 - (65-shift)
-            if (shift > 90) shift = 64 + (shift-90)
-        }
-
-        cipher += String.fromCharCode(shift)
-    }
-    return cipher
-}
-
-function asciiTable() {
-    const asciiArr = [];
-    // do 0-127 for decimal ASCII codes
-    for (let i=0; i < 128; i++) {
-        asciiArr.push(String.fromCharCode(i))
-    }
-    console.log(asciiArr)
-}
-
-function rand(min, max) {
-    max = Math.ceil(max)
-    min = Math.ceil(min)
-    return Math.floor(Math.random() * (max - min + 1) + min)
-}
-
-function randomRotation(str) {
-    if (!str) return []
-    return Array.from(str).map(_ => rand(1, 26))
-}
-
-function addSpace(spaces) {
-    let s = ''
-    for (let i=0; i < spaces; i++) {
-        s += ' '
-    }
-    return s
-}
-
-function uniqueRotate(str, n) {
-    const uniqueRotations = new Set()
-    for (let i=0; i < n; i++) {
-        uniqueRotations.add(randomRotation(str))
-    }
-    return uniqueRotations
-}
-
-function makeSectionHeader(str, header) {
-    return `---------- ${header} ----------
-input: ${str}
-name${addSpace(str.length - 'name'.length)} | rotation
----------------------------------------\n`
-}
-
 
 // Rules
 // ---------
@@ -161,8 +143,8 @@ name${addSpace(str.length - 'name'.length)} | rotation
 // ...
 // z a t
 
-function writeCipher(str, filePath, n=13) {
-    const uniqueRotations = uniqueRotate(str, n)
+function writeCipher(str, folder, filename, n=100) {
+    const uniqueRotations = getUniqueRotations(str, n)
     let names = makeSectionHeader(str, 'Uniform Rotations');
     let unique = makeSectionHeader(str, 'Random Rotations')
 
@@ -179,16 +161,30 @@ function writeCipher(str, filePath, n=13) {
 
     const output = names + unique
 
-    fs.writeFile(filePath, output, (err) => {
-        if (err) console.error(err)
-        console.log(`Writing ${filePath}`)
-    })
+    helpWrite(folder, filename, output)
 
     return output
 }
 
-const out = writeCipher('tanner', './rotations.txt', 10)
-console.log(out)
+function helpWrite(folder, filename, data) {
+    const dateString = new Date().toISOString()
+
+    fs.mkdir(folder, { recursive: true }, (err) => {
+        if (err) throw err
+    })
+
+    const fileExt = filename.match(/\.\w+$/gm)
+    const name = filename.slice(0, -1*fileExt[0].length)
+    const pathToWrite = `${folder}/${name}-${dateString}${fileExt[0]}`
+
+    fs.writeFile(pathToWrite, data, (err) => {
+        if (err) console.error(err)
+        console.log(`Writing ${pathToWrite}`)
+    })
+}
+
+const out = writeCipher('tanner', './ciphers/', 'rotations.txt', 250)
+// console.log(out)
 
 // const el = caesarCipher('tanner', 17)
 // const el = caesarCipher('THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG', 23)
