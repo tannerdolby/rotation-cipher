@@ -17,7 +17,7 @@ console.log(s)
 ```
 
 ### User defined uniform rotation
-Rotate each character by 17 characters:
+Rotate each character by a uniform rotation:
 ```js
 const s = ceasarCipher('tanner', 17)
 console.log(s)
@@ -25,17 +25,18 @@ console.log(s)
 ```
 
 ### Custom rotation array
-Rotate each letter by a specific rotation:
+Rotate each character by a specific rotation:
 ```js
 const s = caesarCipher('tanner', null, [3, 5, 1, 2, 7, 8])
 console.log(s)
 // wfoplz
 ```
 
-### Write ciphers to output file
+### Store ciphers
+Write the ciphers to an output file.
 
 ```js
-const out = writeCipher('tanner', './rotations.txt', 1000)
+const out = writeCipher('tanner', './ciphers', 'rotations.txt', 1000)
 console.log(out)
 // ---------- Uniform Rotations ----------
 // input: tanner
@@ -58,7 +59,7 @@ console.log(out)
 // ...
 ```
 
-Note: Scroll through the output file and checkout the random rotations for a chance of finding a really cool username / social share handle.
+Note: Scroll through the output file and checkout the list of ciphers. In particular, view the random rotations for a chance of finding a really cool username / social share handle.
 
 ### Resources
 - https://en.wikipedia.org/wiki/Caesar_cipher
