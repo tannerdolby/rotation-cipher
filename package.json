@@ -1,15 +1,19 @@
 {
   "name": "caesar-cipher",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Caesar cipher utility.",
+  "main": "cipher.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "caesar-cipher",
+    "substitution",
+    "shift-cipher"
+  ],
+  "author": "Tanner Dolby",
   "license": "ISC",
   "dependencies": {
-    "typescript": "^4.8.4"
+    "jest": "^29.3.1"
   }
 }
