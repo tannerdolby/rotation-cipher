@@ -35,6 +35,6 @@ module.exports = {
     rand,
     addSpace,
     getAsciiTable,
-    makeSectionHeader,
     getHyphenStr,
+    makeSectionHeader,
 }

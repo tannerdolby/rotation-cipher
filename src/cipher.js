@@ -8,7 +8,7 @@ function caesarCipher(str, rot=13, customRot=[], useAscii=false, decrypt=false) 
         return new Error('Custom rotation array must be the same length as the input string')
     }
 
-    if (customRot.length) {
+    if (customRot) {
         let res = ''
         customRot.forEach((rotation, i) => {
             res += rotate(str[i], rotation, useAscii, decrypt)
@@ -43,12 +43,8 @@ function rotate(str, rot, useAscii=false, decrypt=false) {
 
         // TODO: cleanup with modular arithmetic
         if (useAscii) {
-            if (shift < 33) {
-                shift = 127 - (33 - shift)
-            }
-            if (shift > 127) {
-                shift = 33 + (shift - 127)
-            }
+            if (shift < 33) shift = 127 - (33 - shift)
+            if (shift > 127) shift = 33 + (shift - 127)
         }
 
         if (!useAscii && str[i] === str[i].toLowerCase()) {
@@ -170,7 +166,7 @@ function getCustomCiphers(input, useAscii=false, customRotations) {
     if (!customRotations) return []
     const res = []
     customRotations.forEach(rotArr => {
-        res.push(`${caesarCipher(input, null, rotArr, useAscii || false)} | [${rotArr}]`)
+        res.push(`${caesarCipher(input, null, rotArr, useAscii)} | [${rotArr}]`)
     })
     return res
 }
