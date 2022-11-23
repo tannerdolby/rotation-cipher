@@ -1,5 +1,7 @@
 # Caesar Cipher 🗝️
-JavaScript utility for a ceasar cipher. Default rotation is 13 and can be modified. A custom array of rotations matching the length of the input string can be provided to create more custom transformations.
+JavaScript utility for a ceasar cipher. Shift characters in a given string by some amount for a small layer of encryption. Supports shifting in english alphabet (a-zA-Z) and the human-readable ASCII characters between decimal value [33-126].
+
+Default rotation is 13 (ROT13). A custom array of rotations matching the length of the input string can also be provided to create more customized transformations. Random rotations can be generated.
 
 Use cases:
 - perform a basic substitution cipher
@@ -11,7 +13,7 @@ Use cases:
 ### Basic Cipher
 Rotate each character by the default 13 characters:
 ```js
-const s = ceasarCipher('tanner')
+const s = caesarCipher('tanner')
 console.log(s)
 // gnaare
 ```
@@ -19,7 +21,7 @@ console.log(s)
 ### User defined uniform rotation
 Rotate each character by a uniform rotation:
 ```js
-const s = ceasarCipher('tanner', 17)
+const s = caesarCipher('tanner', 17)
 console.log(s)
 // kreevi
 ```
@@ -36,30 +38,45 @@ console.log(s)
 Write the ciphers to an output file.
 
 ```js
-const out = writeCipher('tanner', './ciphers', 'rotations.txt', 1000)
+const out = writeCipher({
+    input: 'tanner',
+    folder: './shh',
+    filename: 'ciphers.txt',
+    customRotations: [
+        [15, 2, 8, 19, 12, 21],
+        [3, 13, 11, 17, 10, 25],
+    ],
+    useAscii: false,
+    randomRotations: 250
+})
 console.log(out)
-// ---------- Uniform Rotations ----------
-// input: tanner
-// name   | rotation
-// ---------------------------------------
-// uboofs | 1
-// vcppgt | 2
-// wdqqhu | 3
-// ...
-// ryllcp | 24
-// szmmdq | 25
-// tanner | 26
-// ---------- Random Rotations ----------
-// input: tanner
-// name   | rotation
-// ---------------------------------------
-// pjgyub | [22,9,19,11,16,10]
-// omilau | [21,12,21,24,22,3]
-// umjlfy | [1,12,22,24,1,7]
-// ...
+/* 
+---------- Uniform Rotations ----------
+input: tanner
+name   | rotation
+---------------------------------------
+uboofs | 1
+vcppgt | 2
+wdqqhu | 3
+xerriv | 4
+...
+qxkkbo | 23
+ryllcp | 24
+szmmdq | 25
+tanner | 26
+---------- Custom Rotations ----------
+icvgqm | [15,2,8,19,12,21]
+wnyeoq | [3,13,11,17,10,25]
+---------- Random Rotations ----------
+rvbaps | [24,21,14,13,11,1]
+rzqnmf | [24,25,3,26,8,14]
+ykafnb | [5,10,13,18,9,10]
+tdxvck | [26,3,10,8,24,19]
+...
+*/
 ```
 
-Note: Scroll through the output file and checkout the list of ciphers. In particular, view the random rotations for a chance of finding a really cool username / social share handle.
+Each file will have a timestamp included after the filename to ensure all records can be maintained. To find your next cool username, scroll through the output file.
 
 ### Resources
 - https://en.wikipedia.org/wiki/Caesar_cipher
