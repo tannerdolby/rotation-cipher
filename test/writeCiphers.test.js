@@ -26,8 +26,7 @@ describe('tests for writing ciphers to output file', () => {
         expect(output.data).toBe(fileContent.toString())
         expect(output.filePath).toBe(path)
 
-        // delete the test file
-        await fs.unlink(path)
+        // delete the test folder
         await fs.rm(this.testFolder, { recursive: true })
     })
 })

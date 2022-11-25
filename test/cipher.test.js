@@ -56,18 +56,22 @@ describe('tests for cipher utility', () => {
     })
 
     test('throw error if input is not a string', () => {
-        function cipherOne() { caesarCipher({}) }
-        function cipherTwo() { caesarCipher([]) }
-        function cipherThree() { caesarCipher(13) }
-        function cipherFour() { caesarCipher(null) }
-        function cipherFive() { caesarCipher(true) }
-        function cipherSix() { caesarCipher() }
+        function cipherOne() { return caesarCipher({}) }
+        function cipherTwo() { return caesarCipher([]) }
+        function cipherThree() { return caesarCipher(13) }
+        function cipherFour() { return caesarCipher(true) }
+        function cipherFive() { return caesarCipher(null) }
+        function cipherSix() { return caesarCipher() }
 
         const fns = [cipherOne, cipherTwo, cipherThree, cipherFour, cipherFive, cipherSix]
 
-        fns.forEach(fn => {
-            expect(fn).toThrow()
-            expect(fn).toThrow(`Input must be type 'string'`)
+        fns.forEach((fn, i) => {
+            if (i < 4) {
+                expect(fn).toThrow()
+                expect(fn).toThrow(`Input must be type 'string'`)
+            } else {
+                expect(fn()).toBe('')
+            }
         })
     })
 
