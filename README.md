@@ -49,7 +49,7 @@ const out = writeCipher({
     useAscii: false,
     randomRotations: 250
 })
-console.log(out)
+console.log(out.data)
 /* 
 ---------- Uniform Rotations ----------
 input: tanner
