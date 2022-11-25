@@ -76,7 +76,7 @@ tdxvck | [26,3,10,8,24,19]
 */
 ```
 
-Each file will have a timestamp included after the filename to ensure all records can be maintained. To find your next cool username, scroll through the output file.
+Each file will have a timestamp included after the filename to ensure all records can be maintained.
 
 ### Resources
 - https://en.wikipedia.org/wiki/Caesar_cipher
