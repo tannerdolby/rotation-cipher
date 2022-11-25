@@ -1,43 +1,6 @@
 const fs = require('fs/promises')
 const { rand, makeSectionHeader } = require('./lib/utility')
 
-// Rules
-// ---------
-// For a uniform rotation on each letter of a string
-// there can only be 26 different rotated strings
-// because the rotation will be from [1..26] characters
-//
-// Custom rotations
-// -------------------
-// c          a         t
-// [1..26]    [1..26]      [1..26]
-
-// O(N x N) time 
-// N characters will mean N branches
-// each branch can represent a range of 25 characters
-// e.g. every other letter in the alphabet
-
-// branch 1
-// c [b,c,...z]^a t
-// c b t
-// c c t
-// ...
-// c z t
-
-// branch 2
-// c a [a,b,c,...z]^t
-// c a a
-// c a b
-// ...
-// c a z
-
-// branch 3
-// [a,b,c,...z]^c a t
-// a a t
-// b a t
-// ...
-// z a t
-
 function caesarCipher(str, rot=13, customRot=null, useAscii=false, decrypt=false) {
     if (!str) return ''
 
@@ -194,34 +157,8 @@ async function writeFile(path, data) {
     }
 }
 
-// const out = writeCipher({
-//     input: 'tanner',
-//     folder: './ciphers',
-//     filename: 'phase-one.txt',
-//     customRotations: [
-//         [15, 2, 8, 19, 12, 21],
-//         [3, 13, 11, 17, 10, 25],
-//     ],
-//     useAscii: false,
-//     randomRotations: 250
-// })
-// console.log(out.data)
-
-// const el = caesarCipher('tanner', 17)
-// const el = caesarCipher('THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG', 23)
-// console.log(el)
-
-// console.log('wow', caesarCipher('tanner'))
-// gnaare
-// console.log(caesarCipher('tanner', 17))
-// kreevi
-// console.log(decrypt('kreevi', 17))
-// tanner
-// console.log(decrypt('gnaare', 13))
-// tanner
-// console.log(solve('kreevi', 'tanner'))
-
 module.exports = {
     caesarCipher,
-    writeCiphers
+    decrypt,
+    writeCiphers,
 }
