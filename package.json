@@ -1,10 +1,10 @@
 {
   "name": "caesar-cipher",
   "version": "1.0.0",
-  "description": "Caesar cipher utility.",
-  "main": "cipher.js",
+  "description": "Caesar cipher utility",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [
     "caesar-cipher",
@@ -13,7 +13,7 @@
   ],
   "author": "Tanner Dolby",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
     "jest": "^29.3.1"
   }
 }
