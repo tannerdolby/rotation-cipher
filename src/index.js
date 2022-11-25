@@ -94,32 +94,51 @@ function solve(encoded, guess = null) {
 function writeCiphers(cipherObj) {
     if (!cipherObj) return
     const {input, folder, filename, customRotations, useAscii, randomRotations} = cipherObj;
-    let names = makeSectionHeader(input, 'Uniform Rotations')
+    const allCiphers = []
+    let uniform = makeSectionHeader(input, 'Uniform Rotations')
     let custom = makeSectionHeader(input, 'Custom Rotations', true)
     let unique = makeSectionHeader(input, 'Random Rotations', true)
 
-    // Uniform rotation
-    for (let i = 1; i < 27; i++) {
-        names += `${caesarCipher(input, i)} | ${i}\n`
-    }
+    // Uniform rotations
+    const uniformCiphers = getUniformCiphers(input, useAscii)
+    uniform += uniformCiphers.join('\n')
 
     // Custom rotations
-    custom += getCustomCiphers(input, useAscii, customRotations).join('\n')
+    const customCiphers = getCustomCiphers(input, useAscii, customRotations)
+    custom += customCiphers.join('\n')
 
     // Random unique rotations
     // k * n^[1-26] time where n is the length of the input string and k is the size of `uniqueRotations`
-    unique += getRandomCiphers(input, useAscii, randomRotations).join('\n')
+    const randomCiphers = getRandomCiphers(input, useAscii, randomRotations)
+    unique += randomCiphers.join('\n')
 
-    const data = `${names}${custom}\n${unique}`
+    allCiphers.push(...uniformCiphers)
+    allCiphers.push(...customCiphers)
+    allCiphers.push(...randomCiphers)
+
+    const fileContent = `${uniform}\n${custom}\n${unique}`
     const dateString = cipherObj.date || new Date().toISOString()
     const fileExt = filename.match(/\.\w+$/gm)
     const name = filename.slice(0, -1 * fileExt[0].length)
     const pathToWrite = `${folder}/${name}-${dateString}${fileExt[0]}`
 
     createDir(folder)
-    writeFile(pathToWrite, data)
+    writeFile(pathToWrite, fileContent)
 
-    return {data: data, createdAt: dateString, filePath: pathToWrite}
+    return {
+        ciphers: allCiphers,
+        fileContent: fileContent,
+        createdAt: dateString,
+        filePath: pathToWrite,
+    }
+}
+
+function getUniformCiphers(input, useAscii=false) {
+    const res = []
+    for (let i = 1; i < 27; i++) {
+        res.push(`${caesarCipher(input, i, null, useAscii)} | ${i}`)
+    }
+    return res
 }
 
 function getCustomCiphers(input, useAscii=false, customRotations) {
