@@ -39,6 +39,8 @@ const { rand, makeSectionHeader } = require('./lib/utility')
 // z a t
 
 function caesarCipher(str, rot=13, customRot=null, useAscii=false, decrypt=false) {
+    if (!str) return ''
+
     if (typeof str != 'string') {
         throw new Error(`Input must be type 'string'`)
     }
@@ -46,8 +48,6 @@ function caesarCipher(str, rot=13, customRot=null, useAscii=false, decrypt=false
     if (customRot && customRot.length > 0 && customRot.length != str.length) {
         throw new Error('Custom rotation array must be the same length as the input string')
     }
-
-    if (!str) return str
 
     if (customRot) {
         let res = ''
@@ -64,13 +64,6 @@ function decrypt(str, rot=13, customRot, useAscii=false) {
     return caesarCipher(str, rot, customRot, useAscii, true)
 }
 
-/**
- * Transform a string by a given rotation amount
- * @param {String} str input string (full string undergoing rotation)
- * @param {Number} rot rotation amount - e.g. the number of characters to rotate a given char [0, 26]
- * @returns {String} rotated string
- *
- */
 function rotate(str, rot, useAscii=false, decrypt=false) {
     let cipher = ''
     for (let i=0; i < str.length; i++) {
