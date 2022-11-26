@@ -4,9 +4,10 @@ A lightweight utility for performing ceasar ciphers. The cipher shifts character
 Default rotation is 13 (ROT13). A custom array of rotations matching the length of the input string can also be provided to create more customized transformations. Random rotations can be generated.
 
 Use cases:
-- perform a basic substitution cipher
-- perform a randomized subsitution cipher
-- generate a cool username / handle
+- perform basic substitution cipher
+- perform custom substitution cipher
+- perform randomized subsitution cipher
+- generate a cool username / social media handle
 
 ## Example Usage
 
