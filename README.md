@@ -35,10 +35,10 @@ console.log(s)
 ```
 
 ### Store ciphers
-Write the ciphers to an output file.
+Write generated ciphers to an output file.
 
 ```js
-const out = writeCipher({
+const out = writeCiphers({
     input: 'tanner',
     folder: './shh',
     filename: 'ciphers.txt',
@@ -49,7 +49,8 @@ const out = writeCipher({
     useAscii: false,
     randomRotations: 250
 })
-console.log(out.data)
+
+console.log(out.fileContent)
 /* 
 ---------- Uniform Rotations ----------
 input: tanner
@@ -60,18 +61,15 @@ vcppgt | 2
 wdqqhu | 3
 xerriv | 4
 ...
-qxkkbo | 23
-ryllcp | 24
 szmmdq | 25
 tanner | 26
 ---------- Custom Rotations ----------
-icvgqm | [15,2,8,19,12,21]
-wnyeoq | [3,13,11,17,10,25]
+mwwcoo | [19,22,9,15,10,23]
+arzytm | [7,17,12,11,15,21]
 ---------- Random Rotations ----------
-rvbaps | [24,21,14,13,11,1]
-rzqnmf | [24,25,3,26,8,14]
-ykafnb | [5,10,13,18,9,10]
-tdxvck | [26,3,10,8,24,19]
+tmcrgc | [26,12,15,4,2,11]
+ottpvl | [21,19,6,2,17,20]
+juekeu | [16,20,17,23,26,3]
 ...
 */
 ```
