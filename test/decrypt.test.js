@@ -1,4 +1,4 @@
-const { decrypt } = require('../src/index')
+const { decrypt } = require('../index')
 
 describe('decrypt cipher tests', () => {
 

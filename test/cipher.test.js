@@ -1,4 +1,4 @@
-const { caesarCipher } = require('../src/index')
+const { caesarCipher } = require('../index')
 
 describe('tests for cipher utility', () => {
 

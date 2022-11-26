@@ -4,7 +4,7 @@ const {
     getAsciiTable,
     getHyphenStr,
     makeSectionHeader,
-} = require('../src/lib/utility')
+} = require('../lib/utility')
 
 describe('tests for utility functions', () => {
     let asciiTable = {}

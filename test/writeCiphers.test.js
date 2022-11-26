@@ -1,4 +1,4 @@
-const { writeCiphers } = require('../src/index')
+const { writeCiphers } = require('../index')
 const fs = require('fs/promises')
 
 describe('tests for writing ciphers to output file', () => {
