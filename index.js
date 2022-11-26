@@ -176,6 +176,20 @@ async function writeFile(path, data) {
     }
 }
 
+// const out = writeCiphers({
+//     input: 'tanner',
+//     folder: './shh',
+//     filename: 'ciphers.txt',
+//     customRotations: [
+//         [19, 22, 9, 15, 10, 23],
+//         [7, 17, 12, 11, 15, 21],
+//     ],
+//     useAscii: false,
+//     randomRotations: 10
+// })
+
+// console.log(out)
+
 module.exports = {
     caesarCipher,
     decrypt,
