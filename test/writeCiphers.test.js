@@ -7,7 +7,7 @@ describe('tests for writing ciphers to output file', () => {
         this.testFile = 'test.txt'
     })
 
-    test('write cipher to file', async () => {
+    test.only('write cipher to file', async () => {
         const output = writeCiphers({
             input: 'tanner',
             folder: this.testFolder,
@@ -23,7 +23,7 @@ describe('tests for writing ciphers to output file', () => {
         const path = `${this.testFolder}/${this.testFile.slice(0, -4)}-${output.createdAt}.txt`
         const fileContent = await fs.readFile(path)
         
-        expect(output.data).toBe(fileContent.toString())
+        expect(output.fileContent).toBe(fileContent.toString())
         expect(output.filePath).toBe(path)
 
         // delete the test folder

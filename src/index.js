@@ -112,15 +112,15 @@ function writeCiphers(cipherObj) {
     const randomCiphers = getRandomCiphers(input, useAscii, randomRotations)
     unique += randomCiphers.join('\n')
 
-    allCiphers.push(...uniformCiphers)
-    allCiphers.push(...customCiphers)
-    allCiphers.push(...randomCiphers)
-
     const fileContent = `${uniform}\n${custom}\n${unique}`
     const dateString = cipherObj.date || new Date().toISOString()
     const fileExt = filename.match(/\.\w+$/gm)
     const name = filename.slice(0, -1 * fileExt[0].length)
     const pathToWrite = `${folder}/${name}-${dateString}${fileExt[0]}`
+
+    allCiphers.push(...uniformCiphers)
+    allCiphers.push(...customCiphers)
+    allCiphers.push(...randomCiphers)
 
     createDir(folder)
     writeFile(pathToWrite, fileContent)
