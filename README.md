@@ -78,10 +78,14 @@ const res = writeCiphers({
     randomRotations: 250
 })
 
-console.log(res.filePath)
-// ./shh/ciphers-2022-11-27T03:52:39.937Z.txt
+// Use .then method or use await within an async function
+res.then(data => {
+    console.log(data.filePath)
+    // ./shh/ciphers-2022-11-27T03:52:39.937Z.txt
 
-console.log(res.fileContent)
+    console.log(res.fileContent)
+})
+
 /* 
 ---------- Uniform Rotations ----------
 input: tanner
