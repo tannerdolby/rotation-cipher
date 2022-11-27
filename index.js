@@ -74,10 +74,10 @@ function getUniqueRotations(str, n, useAscii=false) {
     return uniqueRotations
 }
 
-function writeCiphers(cipherObj) {
+async function writeCiphers(cipherObj) {
     if (!cipherObj) return
-    const {input, folder, filename, customRotations, useAscii, randomRotations} = cipherObj;
     const allCiphers = []
+    const {input, folder, filename, customRotations, useAscii, randomRotations} = cipherObj;
     let uniform = makeSectionHeader(input, 'Uniform Rotations')
     let custom = makeSectionHeader(input, 'Custom Rotations', true)
     let unique = makeSectionHeader(input, 'Random Rotations', true)
@@ -105,8 +105,8 @@ function writeCiphers(cipherObj) {
     allCiphers.push(...customCiphers)
     allCiphers.push(...randomCiphers)
 
-    createDir(folder)
-    writeFile(pathToWrite, fileContent)
+    await createDir(folder)
+    await writeFile(pathToWrite, fileContent)
 
     return {
         ciphers: allCiphers,

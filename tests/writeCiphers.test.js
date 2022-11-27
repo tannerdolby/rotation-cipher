@@ -8,7 +8,7 @@ describe('tests for writing ciphers to output file', () => {
     })
 
     test.only('write cipher to file', async () => {
-        const output = writeCiphers({
+        const output = await writeCiphers({
             input: 'tanner',
             folder: this.testFolder,
             filename: this.testFile,
