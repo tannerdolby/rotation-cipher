@@ -1,7 +1,7 @@
 # Caesar Cipher 🗝️
-A lightweight utility for performing ceasar ciphers. The cipher shifts characters in a given string by a specified amount to provide a small layer of encryption. Supports shifting in english alphabet (a-zA-Z) and the human-readable ASCII characters between decimal value [33-126].
+A lightweight utility for performing ceasar ciphers. The cipher shifts characters in a given string by a specified amount to provide a small layer of encryption.
 
-Default rotation is 13 (ROT13). A custom array of rotations matching the length of the input string can also be provided to create more customized transformations. Random rotations can be generated.
+This package is capable of creating ciphers containing characters in the english alphabet (a-zA-Z) and human-readable ASCII characters (decimal value [33-126]).
 
 Use cases:
 - perform basic, custom, and randomized caesar ciphers
