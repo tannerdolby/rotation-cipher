@@ -62,7 +62,7 @@ function rotate(str, rot, useAscii=false, decrypt=false) {
 function randomRotation(str, useAscii=false) {
     if (!str) return []
     const min = 1
-    const max = useAscii ? 122 : 26
+    const max = useAscii ? 126 : 26
     return Array.from(str).map(_ => rand(min, max))
 }
 
