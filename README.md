@@ -19,8 +19,7 @@ Create ciphers on the fly:
 ```js
 const { caesarCipher } = require('rotation-cipher')
 
-const cipher = caesarCipher('tanner', 21)
-console.log(cipher)
+console.log(caesarCipher('tanner', 21))
 // oviizm
 ```
 
