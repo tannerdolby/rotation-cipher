@@ -8,11 +8,13 @@ function caesarCipher(str, rot=13, customRot=null, useAscii=false, decrypt=false
         throw new Error(`Input must be type 'string'`)
     }
 
-    if (customRot && customRot.length > 0 && customRot.length != str.length) {
+    const hasCustomRotArr = customRot && customRot.length > 0
+
+    if (hasCustomRotArr && customRot.length != str.length) {
         throw new Error('Custom rotation array must be the same length as the input string')
     }
 
-    if (customRot) {
+    if (hasCustomRotArr) {
         let res = ''
         customRot.forEach((rotation, i) => {
             res += rotate(str[i], rotation, useAscii, decrypt)
@@ -122,22 +124,19 @@ function getUniformCiphers(input, useAscii=false) {
     return res
 }
 
-function getCustomCiphers(input, useAscii=false, customRotations) {
+function getCustomCiphers(input, useAscii=false, customRotations=[[]]) {
     if (!customRotations) return []
-    const res = []
-    customRotations.forEach(rotArr => {
-        res.push(`${caesarCipher(input, null, rotArr, useAscii)} | [${rotArr}]`)
-    })
-    return res
+    return customRotations
+        .map(rotArr => {
+            return `${caesarCipher(input, null, rotArr, useAscii)} | [${rotArr}]`
+        })
 }
 
 function getRandomCiphers(input, useAscii=false, randomRotations=250) {
-    const res = []
-    const uniqueRotations = getUniqueRotations(input, randomRotations)
-    uniqueRotations.forEach(rotArr => {
-        res.push(`${caesarCipher(input, null, rotArr, useAscii)} | [${rotArr}]`)
-    })
-    return res
+    return [...getUniqueRotations(input, randomRotations)]
+        .map(rotArr => {
+            return `${caesarCipher(input, null, rotArr, useAscii)} | [${rotArr}]`
+        })
 }
 
 async function createDir(folder, opts) {
