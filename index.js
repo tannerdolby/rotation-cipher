@@ -57,38 +57,19 @@ function rotate(str, rot, useAscii=false, decrypt=false) {
     return cipher
 }
 
-function randomRotation(str) {
+function randomRotation(str, useAscii=false) {
     if (!str) return []
-    return Array.from(str).map(_ => rand(1, 26))
+    const min = 1
+    const max = useAscii ? 122 : 26
+    return Array.from(str).map(_ => rand(min, max))
 }
 
-function getUniqueRotations(str, n) {
+function getUniqueRotations(str, n, useAscii=false) {
     const uniqueRotations = new Set()
     for (let i = 0; i < n; i++) {
-        uniqueRotations.add(randomRotation(str))
+        uniqueRotations.add(randomRotation(str, useAscii))
     }
     return uniqueRotations
-}
-
-function solve(encoded, guess = null) {
-    // if you know the rotation its obv easy to decrypt
-    // usually the rotation / shift amount is not known
-    // hence the point of the encryption / substitution cipher
-    const potential = []
-    // 1. try a constant shift (e.g. each character shifted by N chars)
-    for (let i = 1; i < 27; i++) {
-        const rotatedName = decrypt(encoded, i)
-        potential.push(rotatedName)
-    }
-    // 2. Try random shifts for N guesses
-
-
-    // check for guess
-    if (potential.includes(guess)) {
-        console.log('here')
-    }
-    console.log(potential)
-
 }
 
 function writeCiphers(cipherObj) {
@@ -176,22 +157,16 @@ async function writeFile(path, data) {
     }
 }
 
-// const out = writeCiphers({
-//     input: 'tanner',
-//     folder: './shh',
-//     filename: 'ciphers.txt',
-//     customRotations: [
-//         [19, 22, 9, 15, 10, 23],
-//         [7, 17, 12, 11, 15, 21],
-//     ],
-//     useAscii: false,
-//     randomRotations: 10
-// })
-
-// console.log(out)
-
 module.exports = {
     caesarCipher,
     decrypt,
     writeCiphers,
+    createDir,
+    writeFile,
+    rotate,
+    getUniformCiphers,
+    getCustomCiphers,
+    getRandomCiphers,
+    getUniqueRotations,
+    randomRotation
 }

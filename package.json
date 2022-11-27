@@ -1,18 +1,22 @@
 {
-  "name": "caesar-cipher",
+  "name": "rotation-cipher",
   "version": "1.0.0",
-  "description": "Caesar cipher utility",
+  "description": "A utility for performing caesar ciphers.",
   "main": "index.js",
   "scripts": {
     "test": "jest"
   },
   "keywords": [
     "caesar-cipher",
-    "substitution",
-    "shift-cipher"
+    "shift-cipher",
+    "substitution"
   ],
   "author": "Tanner Dolby",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tannerdolby/rotation-cipher"
+  },
   "devDependencies": {
     "jest": "^29.3.1"
   }
