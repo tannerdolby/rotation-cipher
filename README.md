@@ -81,7 +81,7 @@ writeCiphers({
     console.log(data.filePath)
     // ./shh/ciphers-2022-11-27T03:52:39.937Z.txt
 
-    console.log(res.fileContent)
+    console.log(data.fileContent)
 })
 
 /* 
