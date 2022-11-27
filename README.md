@@ -8,7 +8,7 @@ Use cases:
 - generate a cool username / social media handle
 
 ## Installation
-Install the plugin from [npm](https://www.npmjs.com/package/rotation-cipher):
+Install the package from [npm](https://www.npmjs.com/package/rotation-cipher):
 
 ```shell
 npm install rotation-cipher
