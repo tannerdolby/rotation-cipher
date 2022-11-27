@@ -23,44 +23,44 @@ console.log(caesarCipher('tanner', 21))
 // oviizm
 ```
 
-### Example usage
+## Example usage
 
-#### Basic Cipher
+### Basic Cipher
 Rotate each character by the default 13 characters:
 ```js
 console.log(caesarCipher('tanner'))
 // gnaare
 ```
 
-#### User defined uniform rotation
+### User defined uniform rotation
 Rotate each character by a uniform rotation:
 ```js
 console.log(caesarCipher('tanner', 17))
 // kreevi
 ```
 
-#### User defined uniform rotation (with ASCII)
+### User defined uniform rotation (with ASCII)
 Rotate each character by a uniform rotation including ASCII:
 ```js
 console.log(caesarCipher('tanner', 17, null, true))
 // @Xee\>
 ```
 
-#### Custom rotation array
+### Custom rotation array
 Rotate each character by a specific rotation:
 ```js
 console.log(caesarCipher('tanner', null, [3, 5, 1, 2, 7, 8]))
 // wfoplz
 ```
 
-#### Random rotation
+### Random rotation
 Rotate each character by a random rotation:
 ```js
 console.log(caesarCipher('tanner', null, randomRotation(input)))
 // jiwogv
 ```
 
-#### Store ciphers
+### Store ciphers
 Write generated ciphers to an output file. Each file will have a timestamp included after the filename to ensure all records can be maintained.
 
 ```js
@@ -107,5 +107,5 @@ juekeu | [16,20,17,23,26,3]
 */
 ```
 
-### Resources
+## Resources
 - https://en.wikipedia.org/wiki/Caesar_cipher
