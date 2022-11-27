@@ -61,7 +61,7 @@ console.log(caesarCipher('tanner', null, randomRotation(input)))
 ```
 
 ### Store ciphers
-Write generated ciphers to an output file.
+Write generated ciphers to an output file. Each file will have a timestamp included after the filename to ensure all records can be maintained.
 
 ```js
 const { writeCiphers } = require('rotation-cipher')
@@ -77,6 +77,9 @@ const res = writeCiphers({
     useAscii: false,
     randomRotations: 250
 })
+
+console.log(res.filePath)
+// ./shh/ciphers-2022-11-27T03:52:39.937Z.txt
 
 console.log(res.fileContent)
 /* 
@@ -101,8 +104,6 @@ juekeu | [16,20,17,23,26,3]
 ...
 */
 ```
-
-Each file will have a timestamp included after the filename to ensure all records can be maintained.
 
 ### Resources
 - https://en.wikipedia.org/wiki/Caesar_cipher
