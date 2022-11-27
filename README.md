@@ -97,8 +97,8 @@ xerriv | 4
 szmmdq | 25
 tanner | 26
 ---------- Custom Rotations ----------
-mwwcoo | [19,22,9,15,10,23]
-arzytm | [7,17,12,11,15,21]
+icvgqm | [15,2,8,19,12,21]
+wnyeoq | [3,13,11,17,10,25]
 ---------- Random Rotations ----------
 tmcrgc | [26,12,15,4,2,11]
 ottpvl | [21,19,6,2,17,20]
