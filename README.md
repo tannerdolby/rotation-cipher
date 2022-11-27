@@ -49,17 +49,14 @@ console.log(caesarCipher('tanner', 17, null, true))
 ### Custom rotation array
 Rotate each character by a specific rotation:
 ```js
-const s = caesarCipher('tanner', null, [3, 5, 1, 2, 7, 8])
-console.log(s)
+console.log(caesarCipher('tanner', null, [3, 5, 1, 2, 7, 8]))
 // wfoplz
 ```
 
 ### Random rotation
 Rotate each character by a random rotation:
 ```js
-const input = 'tanner'
-const s  = caesarCipher(input, null, randomRotation(input))
-console.log(s)
+console.log(caesarCipher('tanner', null, randomRotation(input)))
 // jiwogv
 ```
 
@@ -69,7 +66,7 @@ Write generated ciphers to an output file.
 ```js
 const { writeCiphers } = require('rotation-cipher')
 
-const out = writeCiphers({
+const res = writeCiphers({
     input: 'tanner',
     folder: './shh',
     filename: 'ciphers.txt',
@@ -81,7 +78,7 @@ const out = writeCiphers({
     randomRotations: 250
 })
 
-console.log(out.fileContent)
+console.log(res.fileContent)
 /* 
 ---------- Uniform Rotations ----------
 input: tanner
