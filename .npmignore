@@ -1,0 +1,6 @@
+# jest
+tests/
+# 11ty site output
+_site/
+# misc
+.eleventyignore
