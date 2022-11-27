@@ -4,12 +4,17 @@ A lightweight utility for performing ceasar ciphers. The cipher shifts character
 Default rotation is 13 (ROT13). A custom array of rotations matching the length of the input string can also be provided to create more customized transformations. Random rotations can be generated.
 
 Use cases:
-- perform basic substitution cipher
-- perform custom substitution cipher
-- perform randomized subsitution cipher
+- perform basic, custom, and randomized caesar ciphers
 - generate a cool username / social media handle
 
-## Example Usage
+## Installation
+Install the plugin from npm:
+
+```shell
+npm install rotation-cipher
+```
+
+### Example usage
 
 ### Basic Cipher
 Rotate each character by the default 13 characters:
@@ -33,6 +38,15 @@ Rotate each character by a specific rotation:
 const s = caesarCipher('tanner', null, [3, 5, 1, 2, 7, 8])
 console.log(s)
 // wfoplz
+```
+
+### Random rotation
+
+```js
+const input = 'tanner'
+const s  = caesarCipher(input, null, randomRotation(input))
+console.log(s)
+// jiwogv
 ```
 
 ### Store ciphers
@@ -76,6 +90,43 @@ juekeu | [16,20,17,23,26,3]
 ```
 
 Each file will have a timestamp included after the filename to ensure all records can be maintained.
+
+### Functions
+<ul>
+    <li>
+        <a href='https://github.com/tannerdolby/rotation-cipher/blob/master/index.js/#L4'>caesarCipher</a>
+    </li>
+    <li>
+        <a href='https://github.com/tannerdolby/rotation-cipher/blob/master/index.js/#L28'>decrypt</a>
+    </li>
+    <li>
+        <a href='https://github.com/tannerdolby/rotation-cipher/blob/master/index.js/#L77'>writeCiphers</a>
+    </li>
+    <li>
+        <a href='https://github.com/tannerdolby/rotation-cipher/blob/master/index.js/#L142'>createDir</a>
+    </li>
+    <li>
+        <a href='https://github.com/tannerdolby/rotation-cipher/blob/master/index.js/#L151'>writeFile</a>
+    </li>
+    <li>
+        <a href='https://github.com/tannerdolby/rotation-cipher/blob/master/index.js/#L32'>rotate</a>
+    </li>
+    <li>
+        <a href='https://github.com/tannerdolby/rotation-cipher/blob/master/index.js/#L119'>getUniformCiphers</a>
+    </li>
+    <li>
+        <a href='https://github.com/tannerdolby/rotation-cipher/blob/master/index.js/#L127'>getCustomCiphers</a>
+    </li>
+    <li>
+        <a href='https://github.com/tannerdolby/rotation-cipher/blob/master/index.js/#L135'>getRandomCiphers</a>
+    </li>
+    <li>
+        <a href='https://github.com/tannerdolby/rotation-cipher/blob/master/index.js/#L69'>getUniqueRotations</a>
+    </li>
+    <li>
+        <a href='https://github.com/tannerdolby/rotation-cipher/blob/master/index.js/#L62'>randomRotation</a>
+    </li>
+</ul>
 
 ### Resources
 - https://en.wikipedia.org/wiki/Caesar_cipher
