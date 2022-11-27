@@ -66,7 +66,8 @@ Write generated ciphers to an output file. Each file will have a timestamp inclu
 ```js
 const { writeCiphers } = require('rotation-cipher')
 
-const res = writeCiphers({
+// Use .then method or use await within an async function
+writeCiphers({
     input: 'tanner',
     folder: './shh',
     filename: 'ciphers.txt',
@@ -76,10 +77,7 @@ const res = writeCiphers({
     ],
     useAscii: false,
     randomRotations: 250
-})
-
-// Use .then method or use await within an async function
-res.then(data => {
+}).then(data => {
     console.log(data.filePath)
     // ./shh/ciphers-2022-11-27T03:52:39.937Z.txt
 
