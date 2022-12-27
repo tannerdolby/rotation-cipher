@@ -1,5 +1,5 @@
 # Rotation Cipher 🗝️
-A lightweight utility for performing caesar ciphers. The classic cipher shifts characters in a given string by a specified amount to provide a small layer of encryption.
+A lightweight utility for performing caesar ciphers. This classic cipher shifts characters in a given string by a specified amount to provide a small layer of encryption.
 
 This package is capable of creating ciphers containing characters in the english alphabet (a-zA-Z) and human-readable ASCII characters (decimal value [33-126]).
 
