@@ -1,6 +1,6 @@
 {
   "name": "rotation-cipher",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A utility for performing caesar ciphers.",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "caesar-cipher",
     "shift-cipher",
     "rotation-cipher",
-    "substitution"
+    "cipher"
   ],
   "author": "Tanner Dolby",
   "license": "ISC",
