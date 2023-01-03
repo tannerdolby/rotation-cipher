@@ -63,49 +63,7 @@ console.log(caesarCipher('tanner', null, randomRotation(input)))
 ### Store ciphers
 Write generated ciphers to an output file. Each file will have a timestamp included after the filename to ensure all records can be maintained.
 
-```js
-const { writeCiphers } = require('rotation-cipher')
-
-// Use .then method or use await within an async function
-writeCiphers({
-    input: 'tanner',
-    folder: './shh',
-    filename: 'ciphers.txt',
-    customRotations: [
-        [15, 2, 8, 19, 12, 21],
-        [3, 13, 11, 17, 10, 25],
-    ],
-    useAscii: false,
-    randomRotations: 250
-}).then(data => {
-    console.log(data.filePath)
-    // ./shh/ciphers-2022-11-27T03:52:39.937Z.txt
-
-    console.log(data.fileContent)
-})
-
-/* 
----------- Uniform Rotations ----------
-input: tanner
-name   | rotation
----------------------------------------
-uboofs | 1
-vcppgt | 2
-wdqqhu | 3
-xerriv | 4
-...
-szmmdq | 25
-tanner | 26
----------- Custom Rotations ----------
-icvgqm | [15,2,8,19,12,21]
-wnyeoq | [3,13,11,17,10,25]
----------- Random Rotations ----------
-tmcrgc | [26,12,15,4,2,11]
-ottpvl | [21,19,6,2,17,20]
-juekeu | [16,20,17,23,26,3]
-...
-*/
-```
+To avoid making `fs` a required dependency, I dropped `writeCiphers` from this package. It can be found as a [GitHub gist](https://gist.github.com/tannerdolby/ffb9c8fc7992a8b2cff1d2a6dca524c3) for users to reference.
 
 ## Resources
 - https://en.wikipedia.org/wiki/Caesar_cipher
