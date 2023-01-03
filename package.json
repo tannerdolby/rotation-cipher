@@ -1,6 +1,6 @@
 {
   "name": "rotation-cipher",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A utility for performing caesar ciphers.",
   "main": "index.js",
   "scripts": {
