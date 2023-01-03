@@ -74,59 +74,6 @@ function getUniqueRotations(str, n, useAscii=false) {
     return uniqueRotations
 }
 
-async function writeCiphers(cipherObj) {
-    if (!cipherObj) return
-    const allCiphers = []
-    const {input, folder, filename, customRotations, useAscii, randomRotations} = cipherObj;
-    let uniform = makeSectionHeader(input, 'Uniform Rotations')
-    let custom = makeSectionHeader(input, 'Custom Rotations', true)
-    let unique = makeSectionHeader(input, 'Random Rotations', true)
-
-    // Uniform rotations
-    const uniformCiphers = getUniformCiphers(input, useAscii)
-    uniform += uniformCiphers.join('\n')
-
-    // Custom rotations
-    const customCiphers = getCustomCiphers(input, useAscii, customRotations)
-    custom += customCiphers.join('\n')
-
-    // Random unique rotations
-    // k * n^[1-26] time where n is the length of the input string and k is the size of `uniqueRotations`
-    const randomCiphers = getRandomCiphers(input, useAscii, randomRotations)
-    unique += randomCiphers.join('\n')
-
-    const fileContent = `${uniform}\n${custom}\n${unique}`
-    const dateString = cipherObj.date || new Date().toISOString()
-    const fileExt = filename.match(/\.\w+$/gm)
-    const name = filename.slice(0, -1 * fileExt[0].length)
-    const pathToWrite = `${folder}/${name}-${dateString}${fileExt[0]}`
-
-    allCiphers.push(...uniformCiphers)
-    allCiphers.push(...customCiphers)
-    allCiphers.push(...randomCiphers)
-
-    fs.mkdir(folder, {recursive: true}, (err) => {
-        if (err) {
-            console.error(`Unable to create directory: ${err}`)
-        }
-        console.log(`Successfully created directory: '${folder}'`)
-    })
-
-    fs.writeFile(pathToWrite, fileContent, (err) => {
-        if (err) {
-            console.error(`Unable to write file: ${err}`)
-        }
-        console.log(`Successfully wrote file: '${pathToWrite}'`)
-    })
-
-    return {
-        ciphers: allCiphers,
-        fileContent: fileContent,
-        createdAt: dateString,
-        filePath: pathToWrite,
-    }
-}
-
 function getUniformCiphers(input, useAscii=false) {
     const res = []
     for (let i = 1; i < 27; i++) {
@@ -150,21 +97,9 @@ function getRandomCiphers(input, useAscii=false, randomRotations=250) {
         })
 }
 
-async function createDir(folder, opts) {
-    if (!opts) opts = { recursive: true }
-
-    fs.mkdir(folder, opts, (err) => {
-        if (err) {
-            console.error(`Unable to create directory: ${err}`)
-        }
-        console.log(`Successfully created dir '${folder}'`)
-    })
-}
-
 module.exports = {
     caesarCipher,
     decrypt,
-    writeCiphers,
     rotate,
     getUniformCiphers,
     getCustomCiphers,
