@@ -1,5 +1,4 @@
-const fs = require('fs')
-const { rand, makeSectionHeader } = require('./lib/utility')
+const { rand } = require('./lib/utility')
 
 function caesarCipher(str, rot=13, customRot=null, useAscii=false, decrypt=false) {
     if (!str) return ''
