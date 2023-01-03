@@ -1,4 +1,4 @@
-const fs = require('fs/promises')
+const fs = require('fs')
 const { rand, makeSectionHeader } = require('./lib/utility')
 
 function caesarCipher(str, rot=13, customRot=null, useAscii=false, decrypt=false) {
@@ -105,8 +105,19 @@ async function writeCiphers(cipherObj) {
     allCiphers.push(...customCiphers)
     allCiphers.push(...randomCiphers)
 
-    await createDir(folder)
-    await writeFile(pathToWrite, fileContent)
+    fs.mkdir(folder, {recursive: true}, (err) => {
+        if (err) {
+            console.error(`Unable to create directory: ${err}`)
+        }
+        console.log(`Successfully created directory: '${folder}'`)
+    })
+
+    fs.writeFile(pathToWrite, fileContent, (err) => {
+        if (err) {
+            console.error(`Unable to write file: ${err}`)
+        }
+        console.log(`Successfully wrote file: '${pathToWrite}'`)
+    })
 
     return {
         ciphers: allCiphers,
@@ -141,27 +152,19 @@ function getRandomCiphers(input, useAscii=false, randomRotations=250) {
 
 async function createDir(folder, opts) {
     if (!opts) opts = { recursive: true }
-    try {
-        await fs.mkdir(folder, opts)
-    } catch (err) {
-        console.error(`Unable to create directory: ${err}`)
-    }
-}
 
-async function writeFile(path, data) {
-    try {
-        await fs.writeFile(path, data)
-    } catch (err) {
-        console.error(`Unable to write file: ${err}`)
-    }
+    fs.mkdir(folder, opts, (err) => {
+        if (err) {
+            console.error(`Unable to create directory: ${err}`)
+        }
+        console.log(`Successfully created dir '${folder}'`)
+    })
 }
 
 module.exports = {
     caesarCipher,
     decrypt,
     writeCiphers,
-    createDir,
-    writeFile,
     rotate,
     getUniformCiphers,
     getCustomCiphers,
