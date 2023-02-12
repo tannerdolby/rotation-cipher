@@ -54,5 +54,5 @@ function customCipher(s, rotations, decrypt = false) {
 }
 module.exports = {
     caesarCipher,
-    utils
+    utils,
 };
