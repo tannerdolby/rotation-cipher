@@ -13,8 +13,8 @@
         "caesar-cipher",
         "shift-cipher",
         "rotation-cipher",
-		"cipher",
-		"typescript"
+        "cipher",
+        "typescript"
     ],
     "author": "Tanner Dolby",
     "license": "ISC",

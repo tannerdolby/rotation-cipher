@@ -44,8 +44,8 @@ export function caesarCipher(
             shift = cipherHelper(s[i], rot, ascii, decrypt);
             cipher += ascii[shift % nA];
         } else {
-			continue;
-		}
+            continue;
+        }
     }
 
     return cipher;
@@ -74,6 +74,6 @@ function customCipher(
 }
 
 module.exports = {
-	caesarCipher,
-	utils
-}
+    caesarCipher,
+    utils,
+};
