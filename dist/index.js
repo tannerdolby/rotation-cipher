@@ -49,3 +49,7 @@ function customCipher(s, rotations, decrypt = false) {
     }
     return cipher;
 }
+module.exports = {
+    caesarCipher,
+    utils
+};

@@ -72,3 +72,8 @@ function customCipher(
 
     return cipher;
 }
+
+module.exports = {
+	caesarCipher,
+	utils
+}
