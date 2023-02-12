@@ -2,7 +2,7 @@
 
 A lightweight utility for performing caesar ciphers. This classic cipher shifts characters in a given string by a specified amount to provide a small layer of encryption.
 
-This package is capable of creating ciphers containing characters in the english alphabet (a-zA-Z) and human-readable ASCII characters (decimal value [33-126]).
+Capable of creating ciphers containing characters in the english alphabet (a-zA-Z) and human-readable ASCII characters.
 
 Use cases:
 
@@ -20,7 +20,7 @@ npm install rotation-cipher
 Create ciphers on the fly:
 
 ```js
-const { caesarCipher } = require('rotation-cipher');
+import { caesarCipher } from 'rotation-cipher';
 
 console.log(caesarCipher('tanner', 21));
 // oviizm
@@ -51,8 +51,8 @@ console.log(caesarCipher('tanner', 17));
 Rotate each character by a uniform rotation including ASCII:
 
 ```js
-console.log(caesarCipher('tanner', 17, null, true));
-// @Xee\>
+console.log(caesarCipher('t@nn3r!', 15));
+// i,cc}g0
 ```
 
 ### Custom rotation array
@@ -60,7 +60,7 @@ console.log(caesarCipher('tanner', 17, null, true));
 Rotate each character by a specific rotation:
 
 ```js
-console.log(caesarCipher('tanner', null, [3, 5, 1, 2, 7, 8]));
+console.log(caesarCipher('tanner', 0, [3, 5, 1, 2, 7, 8]));
 // wfoplz
 ```
 
@@ -69,15 +69,9 @@ console.log(caesarCipher('tanner', null, [3, 5, 1, 2, 7, 8]));
 Rotate each character by a random rotation:
 
 ```js
-console.log(caesarCipher('tanner', null, randomRotation(input)));
+console.log(caesarCipher('tanner', 0, randomRotation(input)));
 // jiwogv
 ```
-
-### Store ciphers
-
-Write generated ciphers to an output file. Each file will have a timestamp included after the filename to ensure all records can be maintained.
-
-To avoid making `fs` a required dependency, I dropped `writeCiphers` from this package. It can be found as a [GitHub gist](https://gist.github.com/tannerdolby/ffb9c8fc7992a8b2cff1d2a6dca524c3) for users to reference.
 
 ## Resources
 
