@@ -40,12 +40,12 @@ export function caesarCipher(
             shift = cipherHelper(s[i], rot, letters, decrypt);
             let letter = letters[shift % nL];
             cipher += s[i].toLowerCase() === s[i] ? letter : letter.toUpperCase();
-        }
-
-        if (ascii.includes(s[i])) {
+        } else if (ascii.includes(s[i])) {
             shift = cipherHelper(s[i], rot, ascii, decrypt);
             cipher += ascii[shift % nA];
-        }
+        } else {
+			continue;
+		}
     }
 
     return cipher;
