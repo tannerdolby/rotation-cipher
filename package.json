@@ -1,24 +1,31 @@
 {
-  "name": "rotation-cipher",
-  "version": "1.1.1",
-  "description": "A utility for performing caesar ciphers.",
-  "main": "index.js",
-  "scripts": {
-    "test": "jest"
-  },
-  "keywords": [
-    "caesar-cipher",
-    "shift-cipher",
-    "rotation-cipher",
-    "cipher"
-  ],
-  "author": "Tanner Dolby",
-  "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tannerdolby/rotation-cipher"
-  },
-  "devDependencies": {
-    "jest": "^29.3.1"
-  }
+    "name": "rotation-cipher",
+    "version": "1.1.1",
+    "description": "A utility for performing caesar ciphers.",
+    "main": "./dist/index.js",
+    "scripts": {
+        "build": "npx tsc",
+        "dev": "node ./dist/index.js",
+        "format": "npx prettier --write .",
+        "test": "jest"
+    },
+    "keywords": [
+        "caesar-cipher",
+        "shift-cipher",
+        "rotation-cipher",
+        "cipher"
+    ],
+    "author": "Tanner Dolby",
+    "license": "ISC",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/tannerdolby/rotation-cipher"
+    },
+    "dependencies": {
+        "typescript": "^4.9.5"
+    },
+    "devDependencies": {
+        "jest": "^29.4.2",
+        "prettier": "^2.8.4"
+    }
 }

@@ -1,13 +1,12 @@
-const { decrypt } = require('../index')
+const { caesarCipher } = require('../dist/index');
 
 describe('decrypt cipher tests', () => {
-
     test('decrypt a uniform rotation string', () => {
-        expect(decrypt('kreevi', 17)).toBe('tanner')
-        expect(decrypt('gnaare')).toBe('tanner')
-    })
+        expect(caesarCipher('kreevi', 17, [], true)).toBe('tanner');
+        expect(caesarCipher('gnaare', 13, [], true)).toBe('tanner');
+    });
 
     test('decrypt a custom rotation', () => {
-        expect(decrypt('foo', null, [3, 4, 5])).toBe('ckj')
-    })
-})
+        expect(caesarCipher('foo', 0, [3, 4, 5], true)).toBe('ckj');
+    });
+});
