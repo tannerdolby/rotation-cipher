@@ -51,18 +51,23 @@ describe('tests for cipher utility', () => {
         function cipherOne() {
             return caesarCipher({});
         }
+
         function cipherTwo() {
             return caesarCipher([]);
         }
+
         function cipherThree() {
             return caesarCipher(13);
         }
+
         function cipherFour() {
             return caesarCipher(true);
         }
+
         function cipherFive() {
             return caesarCipher(null);
         }
+
         function cipherSix() {
             return caesarCipher();
         }
