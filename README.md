@@ -69,8 +69,10 @@ console.log(caesarCipher('tanner', 0, [3, 5, 1, 2, 7, 8]));
 Rotate each character by a random rotation:
 
 ```js
-console.log(caesarCipher('tanner', 0, randomRotation(input)));
-// jiwogv
+import { caesarCipher, randomRotation } from 'rotation-cipher';
+
+let s = 'tanner';
+console.log(caesarCipher(s, 0, randomRotation(s)));
 ```
 
 ## Resources
