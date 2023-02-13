@@ -1,7 +1,7 @@
 {
     "name": "rotation-cipher",
-    "version": "1.2.0",
-    "description": "A utility for performing caesar ciphers.",
+    "version": "1.2.1",
+    "description": "A utility for performing caesar ciphers",
     "main": "./dist/index.js",
     "scripts": {
         "build": "npx tsc",
