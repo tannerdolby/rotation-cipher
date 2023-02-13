@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.caesarCipher = void 0;
-const utils = require("./lib/utility");
+const utility_1 = require("./lib/utility");
 function cipherHelper(ch, rot, chars, decrypt = false) {
-    let idx = utils.findChar(ch, chars);
+    let idx = (0, utility_1.findChar)(ch, chars);
     let shift = decrypt ? idx - rot : idx + rot;
     if (shift < 0) {
         shift = chars.length - Math.abs(shift);
@@ -11,8 +11,8 @@ function cipherHelper(ch, rot, chars, decrypt = false) {
     return shift;
 }
 function caesarCipher(s, rot = 13, rotations = [], decrypt = false) {
-    const letters = utils.getAlphabet();
-    const ascii = utils.getAsciiWithoutLetters();
+    const letters = (0, utility_1.getAlphabet)();
+    const ascii = (0, utility_1.getAsciiWithoutLetters)();
     let nL = letters.length;
     let nA = ascii.length;
     let cipher = '';
@@ -54,5 +54,18 @@ function customCipher(s, rotations, decrypt = false) {
 }
 module.exports = {
     caesarCipher,
-    utils,
+    randomRotation: utility_1.randomRotation,
+    getUniqueRotations: utility_1.getUniqueRotations,
+    getUniformCiphers: utility_1.getUniformCiphers,
+    getCustomCiphers: utility_1.getCustomCiphers,
+    getRandomCiphers: utility_1.getRandomCiphers,
+    getRepeatedChars: utility_1.getRepeatedChars,
+    getAlphabet: utility_1.getAlphabet,
+    getAsciiTable: utility_1.getAsciiTable,
+    getHumanReadableAscii: utility_1.getHumanReadableAscii,
+    getAsciiWithoutLetters: utility_1.getAsciiWithoutLetters,
+    rand: utility_1.rand,
+    findChar: utility_1.findChar,
+    makeSectionHeader: utility_1.makeSectionHeader,
+    getCiphers: utility_1.getCiphers,
 };

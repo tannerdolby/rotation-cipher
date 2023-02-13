@@ -6,7 +6,7 @@ describe('tests for writing ciphers to output file', () => {
             [15, 2, 8, 19, 12, 21],
             [3, 13, 11, 17, 10, 25],
         ];
-        const output = getCiphers('tanner', customRots, false, 250);
+        const output = getCiphers('tanner', customRots, 250);
         expect(output.ciphers.length).toBe(278);
     });
 });

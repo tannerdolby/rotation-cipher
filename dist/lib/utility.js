@@ -2,41 +2,39 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getCiphers = exports.makeSectionHeader = exports.findChar = exports.rand = exports.getAsciiWithoutLetters = exports.getHumanReadableAscii = exports.getAsciiTable = exports.getAlphabet = exports.getRepeatedChars = exports.getRandomCiphers = exports.getCustomCiphers = exports.getUniformCiphers = exports.getUniqueRotations = exports.randomRotation = void 0;
 const index_1 = require("../index");
-function randomRotation(s, useAscii = false) {
+function randomRotation(s, min = 1, max = 126) {
     if (!s)
         return [];
-    const min = 1;
-    const max = useAscii ? 126 : 26;
     return Array.from(s).map((_) => rand(min, max));
 }
 exports.randomRotation = randomRotation;
-function getUniqueRotations(s, n, useAscii = false) {
+function getUniqueRotations(s, n) {
     const rotations = new Set();
     for (let i = 0; i < n; i++) {
-        rotations.add(randomRotation(s, useAscii));
+        rotations.add(randomRotation(s));
     }
     return rotations;
 }
 exports.getUniqueRotations = getUniqueRotations;
-function getUniformCiphers(s, useAscii = false) {
+function getUniformCiphers(s) {
     const ciphers = [];
     for (let i = 1; i < 27; i++) {
-        ciphers.push(`${(0, index_1.caesarCipher)(s, i, [], useAscii)} | ${i}`);
+        ciphers.push(`${(0, index_1.caesarCipher)(s, i)} | ${i}`);
     }
     return ciphers;
 }
 exports.getUniformCiphers = getUniformCiphers;
-function getCustomCiphers(input, useAscii = false, rotations) {
+function getCustomCiphers(input, rotations) {
     if (!rotations)
         return [];
     return rotations.map((rot) => {
-        return `${(0, index_1.caesarCipher)(input, 0, rot, useAscii)} | [${rot}]`;
+        return `${(0, index_1.caesarCipher)(input, 0, rot)} | [${rot}]`;
     });
 }
 exports.getCustomCiphers = getCustomCiphers;
-function getRandomCiphers(input, useAscii = false, randomRotations = 250) {
-    return [...getUniqueRotations(input, randomRotations)].map((rotArr) => {
-        return `${(0, index_1.caesarCipher)(input, 0, rotArr, useAscii)} | [${rotArr}]`;
+function getRandomCiphers(input, randomRotations = 250) {
+    return [...getUniqueRotations(input, randomRotations)].map((rot) => {
+        return `${(0, index_1.caesarCipher)(input, 0, rot)} | [${rot}]`;
     });
 }
 exports.getRandomCiphers = getRandomCiphers;
@@ -94,16 +92,16 @@ function makeSectionHeader(s, header, hideInfo = false) {
     return `---------- ${header} ----------\n${info}`;
 }
 exports.makeSectionHeader = makeSectionHeader;
-function getCiphers(input, rotations, useAscii, randomRotations) {
-    if (!input)
+function getCiphers(s, rotations, randomRotations) {
+    if (!s)
         return {};
     const cipherList = [];
-    let uniform = makeSectionHeader(input, 'Uniform Rotations');
-    let custom = makeSectionHeader(input, 'Custom Rotations', true);
-    let unique = makeSectionHeader(input, 'Random Rotations', true);
-    const uniformCiphers = getUniformCiphers(input, useAscii);
-    const customCiphers = getCustomCiphers(input, useAscii, rotations);
-    const randomCiphers = getRandomCiphers(input, useAscii, randomRotations);
+    let uniform = makeSectionHeader(s, 'Uniform Rotations');
+    let custom = makeSectionHeader(s, 'Custom Rotations', true);
+    let unique = makeSectionHeader(s, 'Random Rotations', true);
+    const uniformCiphers = getUniformCiphers(s);
+    const customCiphers = getCustomCiphers(s, rotations);
+    const randomCiphers = getRandomCiphers(s, randomRotations);
     uniform += uniformCiphers.join('\n');
     custom += customCiphers.join('\n');
     unique += randomCiphers.join('\n');
