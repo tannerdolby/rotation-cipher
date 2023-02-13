@@ -1,9 +1,22 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.caesarCipher = void 0;
-const utility_1 = require("./lib/utility");
+exports.caesarCipher = exports.getCiphers = exports.getAsciiWithoutLetters = exports.getHumanReadableAscii = exports.getAsciiTable = exports.getAlphabet = exports.getRepeatedChars = exports.getRandomCiphers = exports.getCustomCiphers = exports.getUniformCiphers = exports.getUniqueRotations = exports.randomRotation = exports.util = void 0;
+const util = require("./lib/utility");
+exports.util = util;
+var utility_1 = require("./lib/utility");
+Object.defineProperty(exports, "randomRotation", { enumerable: true, get: function () { return utility_1.randomRotation; } });
+Object.defineProperty(exports, "getUniqueRotations", { enumerable: true, get: function () { return utility_1.getUniqueRotations; } });
+Object.defineProperty(exports, "getUniformCiphers", { enumerable: true, get: function () { return utility_1.getUniformCiphers; } });
+Object.defineProperty(exports, "getCustomCiphers", { enumerable: true, get: function () { return utility_1.getCustomCiphers; } });
+Object.defineProperty(exports, "getRandomCiphers", { enumerable: true, get: function () { return utility_1.getRandomCiphers; } });
+Object.defineProperty(exports, "getRepeatedChars", { enumerable: true, get: function () { return utility_1.getRepeatedChars; } });
+Object.defineProperty(exports, "getAlphabet", { enumerable: true, get: function () { return utility_1.getAlphabet; } });
+Object.defineProperty(exports, "getAsciiTable", { enumerable: true, get: function () { return utility_1.getAsciiTable; } });
+Object.defineProperty(exports, "getHumanReadableAscii", { enumerable: true, get: function () { return utility_1.getHumanReadableAscii; } });
+Object.defineProperty(exports, "getAsciiWithoutLetters", { enumerable: true, get: function () { return utility_1.getAsciiWithoutLetters; } });
+Object.defineProperty(exports, "getCiphers", { enumerable: true, get: function () { return utility_1.getCiphers; } });
 function cipherHelper(ch, rot, chars, decrypt = false) {
-    let idx = (0, utility_1.findChar)(ch, chars);
+    let idx = util.findChar(ch, chars);
     let shift = decrypt ? idx - rot : idx + rot;
     if (shift < 0) {
         shift = chars.length - Math.abs(shift);
@@ -11,8 +24,8 @@ function cipherHelper(ch, rot, chars, decrypt = false) {
     return shift;
 }
 function caesarCipher(s, rot = 13, rotations = [], decrypt = false) {
-    const letters = (0, utility_1.getAlphabet)();
-    const ascii = (0, utility_1.getAsciiWithoutLetters)();
+    const letters = util.getAlphabet();
+    const ascii = util.getAsciiWithoutLetters();
     let nL = letters.length;
     let nA = ascii.length;
     let cipher = '';
@@ -52,20 +65,3 @@ function customCipher(s, rotations, decrypt = false) {
     }
     return cipher;
 }
-module.exports = {
-    caesarCipher,
-    randomRotation: utility_1.randomRotation,
-    getUniqueRotations: utility_1.getUniqueRotations,
-    getUniformCiphers: utility_1.getUniformCiphers,
-    getCustomCiphers: utility_1.getCustomCiphers,
-    getRandomCiphers: utility_1.getRandomCiphers,
-    getRepeatedChars: utility_1.getRepeatedChars,
-    getAlphabet: utility_1.getAlphabet,
-    getAsciiTable: utility_1.getAsciiTable,
-    getHumanReadableAscii: utility_1.getHumanReadableAscii,
-    getAsciiWithoutLetters: utility_1.getAsciiWithoutLetters,
-    rand: utility_1.rand,
-    findChar: utility_1.findChar,
-    makeSectionHeader: utility_1.makeSectionHeader,
-    getCiphers: utility_1.getCiphers,
-};

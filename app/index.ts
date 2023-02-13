@@ -1,4 +1,6 @@
-import {
+import * as util from './lib/utility';
+export { util };
+export {
     randomRotation,
     getUniqueRotations,
     getUniformCiphers,
@@ -9,9 +11,6 @@ import {
     getAsciiTable,
     getHumanReadableAscii,
     getAsciiWithoutLetters,
-    rand,
-    findChar,
-    makeSectionHeader,
     getCiphers,
 } from './lib/utility';
 
@@ -21,7 +20,7 @@ function cipherHelper(
     chars: Array<string>,
     decrypt: boolean = false
 ) {
-    let idx = findChar(ch, chars);
+    let idx = util.findChar(ch, chars);
     let shift = decrypt ? idx - rot : idx + rot;
     if (shift < 0) {
         shift = chars.length - Math.abs(shift);
@@ -35,8 +34,8 @@ export function caesarCipher(
     rotations: Array<number> = [],
     decrypt: boolean = false
 ) {
-    const letters = getAlphabet();
-    const ascii = getAsciiWithoutLetters();
+    const letters = util.getAlphabet();
+    const ascii = util.getAsciiWithoutLetters();
     let nL = letters.length;
     let nA = ascii.length;
     let cipher = '';
@@ -87,21 +86,3 @@ function customCipher(
 
     return cipher;
 }
-
-module.exports = {
-    caesarCipher,
-    randomRotation,
-    getUniqueRotations,
-    getUniformCiphers,
-    getCustomCiphers,
-    getRandomCiphers,
-    getRepeatedChars,
-    getAlphabet,
-    getAsciiTable,
-    getHumanReadableAscii,
-    getAsciiWithoutLetters,
-    rand,
-    findChar,
-    makeSectionHeader,
-    getCiphers,
-};
